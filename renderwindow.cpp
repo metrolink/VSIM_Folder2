@@ -82,12 +82,12 @@ void RenderWindow::init()
     //NB: hardcoded path to files! You have to change this if you change directories for the project.
     //Qt makes a build-folder besides the project folder. That is why we go down one directory
     // (out of the build-folder) and then up into the project folder.
-    mShaderProgram[0] = new Shader("../GSOpenGL2019/plainvertex.vert", "../GSOpenGL2019/plainfragment.frag");
+    mShaderProgram[0] = new Shader("../VSIM_Folder2/plainvertex.vert", "../VSIM_Folder2/plainfragment.frag");
     qDebug() << "Plain shader program id: " << mShaderProgram[0]->getProgram();
-    mShaderProgram[1]= new Shader("../GSOpenGL2019/texturevertex.vert", "../GSOpenGL2019/texturefragmet.frag");
+    mShaderProgram[1]= new Shader("../VSIM_Folder2/texturevertex.vert", "../VSIM_Folder2/texturefragmet.frag");
     qDebug() << "Texture shader program id: " << mShaderProgram[1]->getProgram();
 
-    mShaderProgram[2] = new Shader("../GSOpenGL2019/NPCVertex.vert", "../GSOpenGL2019/NPCfragment.frag");
+    mShaderProgram[2] = new Shader("../VSIM_Folder2/NPCVertex.vert", "../VSIM_Folder2/NPCfragment.frag");
     qDebug() << "Plain shader program id: " << mShaderProgram[2]->getProgram();
 
     setupPlainShader(0);
@@ -95,7 +95,7 @@ void RenderWindow::init()
 
     //**********************  Texture stuff: **********************
     mTexture[0] = new Texture();
-    mTexture[1] = new Texture("../GSOpenGL2019/Assets/hund.bmp");
+    mTexture[1] = new Texture("../VSIM_Folder2/Assets/hund.bmp");
 
     //Set the textures loaded to a texture unit
     glActiveTexture(GL_TEXTURE0);
@@ -132,7 +132,9 @@ void RenderWindow::init()
 
     //********************** Set up camera **********************
     mCurrentCamera = new Camera();
-    mCurrentCamera->setPosition(gsl::Vector3D(-1.f, -.5f, 2.f));
+    mCurrentCamera->setPosition(gsl::Vector3D(30.f, -20.5f, 15.f));
+    mCurrentCamera->yaw(45);
+    mCurrentCamera->pitch(20);
 
     initTerrain();
 }
@@ -528,7 +530,7 @@ bool RenderWindow::readTerrainData(std::string file)
 
 void RenderWindow::initTerrain()
 {
-    //readTerrainData("../GSOpenGL2019/SecondTriangle.txt");
+    //readTerrainData("../VSIM_Folder2/SecondTriangle.txt");
 
         constructTerrain();
 
@@ -569,7 +571,7 @@ void RenderWindow::initTerrain()
 
 void RenderWindow::constructTerrain()
 {
-    gsl::LASLoader loader{"../GSOpenGL2019/Mountain.las"};
+    gsl::LASLoader loader{"../VSIM_Folder2/Mountain.las"};
 
     bool flipY = true;
 
